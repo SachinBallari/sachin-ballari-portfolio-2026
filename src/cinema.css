@@ -1,0 +1,66 @@
+/* Transforms only: the approved document layout and design tokens stay intact. */
+html.motion-desktop { scroll-behavior:auto }
+.cinema-enabled .portfolio-shapes .shape { translate:0 var(--film-background-y,0px) }
+
+/* Existing sections carry the parallax narrative; no extra content chapter is inserted. */
+.cinema-enabled .work .section-head,.cinema-enabled .experience .section-head{translate:0 calc(var(--film-drift,0px) * -.7)}
+.cinema-enabled .tools-shell{translate:0 calc(var(--film-drift,0px) * .45)}
+.cinema-enabled .experience .timeline{translate:0 calc(var(--film-drift,0px) * .3)}
+.cinema-enabled .testimonials-heading{translate:0 calc(var(--film-drift,0px) * -.55)}
+.cinema-enabled .testimonial-board{translate:0 calc(var(--film-drift,0px) * .4)}
+.cinema-enabled .contact-card{translate:0 calc(var(--film-drift,0px) * -.35)}
+
+/* Scroll and pointer motion compose on the same visual, without competing transitions. */
+.cinema-enabled .motion-tilt.is-visible,
+.cinema-enabled .hero.is-visible .hero-art.motion-tilt {
+  transform:perspective(1100px) translateY(var(--film-y,0px))
+    rotateX(calc(var(--tilt-x,0deg) + var(--film-angle,0deg)))
+    rotateY(var(--tilt-y,0deg)) scale(var(--film-scale,1))!important;
+  filter:none!important;
+}
+.cinema-enabled .motion-depth { translate:none }
+.cinema-enabled .hero-art .hero-photo img,
+.cinema-enabled .about-image .about-photo,
+.cinema-enabled .featured-preview .project-cover-image {
+  translate:var(--media-x,0px) var(--media-y,0px);
+  scale:var(--film-zoom,1)!important;
+  transition:scale 180ms linear;
+}
+.cinema-enabled .motion-tilt.is-pointer-active .hero-photo img,
+.cinema-enabled .motion-tilt.is-pointer-active .about-photo,
+.cinema-enabled .motion-tilt.is-pointer-active .project-cover-image { scale:1.025!important }
+.cinema-enabled .featured-details > div { translate:calc(var(--media-x,0px) * .25) calc(var(--media-y,0px) * .25) }
+.cinema-enabled .featured-preview .artwork:hover { transform:none;filter:none }
+.cinema-enabled .featured-visual { animation:filmProjectSwap 480ms cubic-bezier(.16,1,.3,1) both }
+@keyframes filmProjectSwap {
+  from { opacity:.25;transform:perspective(1000px) translateY(14px) rotateX(3deg) scale(.985) }
+  to { opacity:1;transform:none }
+}
+
+/* The collage now assembles forward and backward as the scroll playhead moves. */
+.cinema-enabled .creative-intro-art .assembled-collage {
+  animation:none!important;
+  opacity:1!important;
+  filter:none!important;
+  rotate:none;
+  translate:0 var(--film-drift,0px);
+}
+.cinema-enabled .creative-intro-art .collage-piece {
+  transition:none!important;
+  opacity:1!important;
+  scale:1!important;
+  translate:none!important;
+}
+.cinema-enabled .creative-intro-art .piece-left { transform:translateX(var(--slice-left,0%)) rotate(calc(var(--slice-rotation,0deg) * -1))!important }
+.cinema-enabled .creative-intro-art .piece-center { transform:translateY(var(--slice-center,0%))!important }
+.cinema-enabled .creative-intro-art .piece-right { transform:translateX(var(--slice-right,0%)) rotate(var(--slice-rotation,0deg))!important }
+.cinema-enabled .gallery-item > span { translate:calc(var(--media-x,0px) * .55) calc(var(--media-y,0px) * .55) }
+.cinema-enabled .gallery-item > small { translate:calc(var(--media-x,0px) * .25) calc(var(--media-y,0px) * .25) }
+.cinema-enabled .gallery-item.is-pointer-active { transform:perspective(1100px) translateY(-4px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg))!important }
+
+@media (prefers-reduced-motion:reduce) {
+  .featured-visual { animation:none!important }
+  .creative-intro-art .collage-piece { transform:none!important;opacity:1!important;translate:none!important }
+  .creative-intro-art .assembled-collage { animation:none!important;translate:none!important;rotate:none!important }
+  .portfolio-shapes .shape { translate:none!important }
+}
