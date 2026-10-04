@@ -13,8 +13,9 @@ export const profile = {
 export const projects = [
   { number: '001', slug: 'tagx', title: 'TAGX', category: 'Creative Professional Marketplace', description: 'A marketplace connecting clients with photographers, videographers, designers and other creative professionals.', tags: ['PRODUCT DESIGN', 'UX RESEARCH', 'UI DESIGN', 'MOBILE'] },
   { number: '002', slug: 'boathelper', title: 'BOATHELPER', category: 'Boating Experience Platform', description: 'A simpler way to discover and navigate boating experiences.', tags: ['UX DESIGN', 'MOBILE EXPERIENCE', 'USER FLOWS', 'INTERACTION DESIGN'] },
-  { number: '003', slug: 'smart-navigation-stick', title: 'SMART NAVIGATION STICK', category: 'Assistive Navigation System', description: 'Assistive navigation for visually impaired users.', tags: ['ACCESSIBILITY', 'PRODUCT DESIGN', 'ECE × UX', 'PROBLEM SOLVING'] },
-  { number: '004', slug: 'rbi-website-redesign', title: 'RBI WEBSITE REDESIGN', category: 'Public Information Platform', description: 'A task-first redesign that makes official RBI information clearer, easier to verify and simpler to navigate.', tags: ['UX RESEARCH', 'INFORMATION ARCHITECTURE', 'UI DESIGN', 'RESPONSIVE WEB'] }
+  { number: '003', slug: 'pop-upi-website', title: 'POP UPI WEBSITE', category: 'UPI Payments Website', description: 'Case study coming soon.', tags: ['UI DESIGN', 'WEB DESIGN'] },
+  { number: '004', slug: 'rbi-website-redesign', title: 'RBI WEBSITE REDESIGN', category: 'Public Information Platform', description: 'A task-first redesign that makes official RBI information clearer, easier to verify and simpler to navigate.', tags: ['UX RESEARCH', 'INFORMATION ARCHITECTURE', 'UI DESIGN', 'RESPONSIVE WEB'] },
+  { number: '005', slug: 'interactive-portfolio', title: 'INTERACTIVE PORTFOLIO', category: 'Personal Portfolio Website', description: 'Case study coming soon.', tags: ['WEB DESIGN', 'INTERACTION DESIGN'] }
 ];
 export const experience = [
   { period: '2020 — PANDEMIC', title: 'CONTENT CREATOR · YOUTUBE', role: 'Video Creation · Editing · Visual Storytelling', description: 'Started creating YouTube content during the pandemic, experimenting with video editing, storytelling and visual communication.' },
