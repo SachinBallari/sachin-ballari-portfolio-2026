@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>POP UPI — Desktop Case Study</title>
+<style>
+:root{--paper:#f8f7f3;--ink:#111116;--muted:#686871;--line:#d9d8d3;--purple:#7b36ff;--violet:#a45cff;--orange:#ff5b18;--orange2:#ff8a38;--green:#25df8a;--amber:#f5a623;--red:#ef4444;--dark:#18181f;--max:1220px;--mx:0;--my:0;--progress:0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#d9d9d5;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;top:0;left:0;width:100%;height:4px;z-index:100;background:linear-gradient(90deg,var(--purple),var(--violet),var(--orange));transform:scaleX(var(--progress));transform-origin:left}
+.canvas{width:min(calc(100% - 40px),var(--max));margin:20px auto 60px;background:var(--paper);border-top:6px solid var(--purple);box-shadow:0 28px 90px #1111162b;position:relative;overflow:hidden}
+.grain{position:absolute;inset:0;pointer-events:none;z-index:80;opacity:.1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E")}
+nav{display:flex;justify-content:space-between;align-items:center;padding:28px clamp(24px,6vw,72px);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;position:relative;z-index:5}
+.brand{display:flex;align-items:center;gap:12px}.coin{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font:italic 900 22px Georgia;background:linear-gradient(145deg,#ffad58,var(--orange) 55%,#d73b08);border:2px solid #ff9b4a}
+.links{display:flex;gap:26px}nav a,.back{color:inherit;text-decoration:none;position:relative}nav a:after,.back:after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--purple);transform:scaleX(0);transform-origin:right;transition:.35s}nav a:hover:after,.back:hover:after{transform:scaleX(1);transform-origin:left}
+.slice{position:relative;padding:clamp(70px,9vw,125px) clamp(24px,6vw,72px)}.slice+.slice{padding-top:55px}.slice:before{content:"";position:absolute;left:clamp(24px,6vw,72px);top:0;width:70px;height:4px;border-radius:4px;background:var(--accent,var(--purple))}
+.hero{min-height:790px;display:grid;align-content:center;padding-top:100px!important;overflow:hidden}.hero:before{display:none}
+.eyebrow,.kicker{font-size:11px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
+h1{font-size:clamp(62px,10.5vw,136px);line-height:.82;letter-spacing:-.078em;margin:20px 0 34px;max-width:1000px}.outline{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero-copy{max-width:720px;font-size:clamp(17px,2vw,23px);line-height:1.5;color:#50505a}.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px}
+.pill{display:inline-flex;align-items:center;min-height:38px;padding:0 15px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:11px;font-weight:900;transition:.3s}.pill:hover{transform:translateY(-6px) scale(1.04) rotate(-1deg);box-shadow:0 12px 24px #7b36ff22;border-color:#a88aff}
+.hero-orb{position:absolute;width:390px;height:390px;border-radius:50%;right:-110px;top:75px;z-index:-1;background:radial-gradient(circle at 34% 28%,#c18cff,var(--purple) 57%,#4c18b9);box-shadow:0 40px 100px #7b36ff3d;transform:translate3d(calc(var(--mx)*18px),calc(var(--my)*18px),0)}
+.hero-coin{position:absolute;width:150px;height:150px;border-radius:50%;right:17%;bottom:78px;z-index:-1;display:grid;place-items:center;color:#fff;font:italic 950 76px Georgia;background:linear-gradient(145deg,#ffb05b,#ff5b18 50%,#d73b08);border:7px solid #ff9b4a;box-shadow:inset 0 0 0 2px #fff5,0 25px 55px #ff5b183c;transform:rotate(-12deg) translate3d(calc(var(--mx)*-13px),calc(var(--my)*-13px),0)}
+.scroll{position:absolute;bottom:38px;left:clamp(24px,6vw,72px);font-size:10px;letter-spacing:.2em;text-transform:uppercase}.scroll:after{content:"↓";margin-left:12px;display:inline-block;animation:bob 1.4s infinite}@keyframes bob{50%{transform:translateY(7px)}}
+.bigword{position:absolute;right:-35px;top:22%;font-size:clamp(90px,17vw,220px);font-weight:950;letter-spacing:-.09em;color:#11111608;pointer-events:none;transform:translateY(var(--shift,0))}
+.split{display:grid;grid-template-columns:1.08fr .8fr;gap:clamp(40px,8vw,110px)}h2{font-size:clamp(38px,6vw,72px);line-height:.94;letter-spacing:-.055em;margin:0 0 30px;max-width:900px}h3{font-size:20px;letter-spacing:-.025em;margin:0 0 10px}p{font-size:16px;line-height:1.72;color:var(--muted);margin:0 0 18px}.lead{font-size:clamp(20px,2.5vw,29px);line-height:1.45;color:var(--ink);max-width:900px}.note{border-left:5px solid var(--orange);padding:8px 0 8px 24px}.note strong{font-size:27px;line-height:1.15;display:block;margin-bottom:12px}
+.statement{font-size:clamp(32px,5.4vw,67px);line-height:1.04;font-weight:900;letter-spacing:-.055em;max-width:980px;margin:30px 0 70px}.statement em{font-style:normal;color:var(--purple)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:45px}.stat{padding:25px;border:1px solid var(--line);border-radius:20px;background:#fff;min-height:145px;transition:.38s}.stat:hover{transform:translateY(-12px) rotate(-1deg);border-color:#9e7aff;box-shadow:0 24px 50px #7b36ff17}.stat b{display:block;font-size:34px;color:var(--purple);margin-bottom:12px}.stat span{font-size:12px;font-weight:800;color:var(--muted);line-height:1.45}
+
+/* DESIGN SYSTEM */
+.system{margin-top:45px;background:var(--dark);color:#fff;border-radius:34px;padding:clamp(28px,5vw,58px);position:relative;overflow:hidden;box-shadow:0 25px 60px #11111618}.system:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-150px;top:-150px;background:radial-gradient(circle,#8b4dff55,transparent 68%)}
+.dsrow{position:relative;z-index:2;display:grid;grid-template-columns:180px 1fr;gap:35px;padding:28px 0;border-top:1px solid #ffffff16}.dsrow:first-child{border-top:0;padding-top:0}.label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:950;color:#aaaab4}
+.swatches{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.swatch{min-height:105px;border-radius:16px;padding:12px;display:flex;flex-direction:column;justify-content:end;border:1px solid #fff2;transition:.3s}.swatch:hover{transform:translateY(-9px) scale(1.03);box-shadow:0 18px 35px #0006}.swatch b{font-size:12px}.swatch small{font-size:9px;opacity:.72;margin-top:4px}.s1{background:#7b36ff}.s2{background:#a45cff}.s3{background:#ff5b18}.s4{background:#ff8a38;color:#111}.s5{background:#25df8a;color:#111}.s6{background:#f5a623;color:#111}.s7{background:#f8f7f3;color:#111}
+.type{display:grid;gap:15px}.txl{font-size:44px;font-weight:950;letter-spacing:-.07em}.tlg{font-size:25px;font-weight:850}.tbody{font-size:16px;color:#c7c7ce}.tm{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#aaaab4;font-weight:900}
+.components{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.btn{border:1px solid #8d5dff;border-radius:12px;background:linear-gradient(135deg,#7b36ff,#9c48ff);color:#fff;padding:13px 22px;font-weight:900;transition:.3s;box-shadow:0 8px 25px #7b36ff30}.btn:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 16px 35px #7b36ff55}.btn.alt{background:transparent;box-shadow:none;border-color:#ffffff35}.icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;border:1px solid #ffffff20;background:#ffffff08;color:#b986ff;font-size:20px;transition:.35s}.icon:hover{transform:translateY(-7px) rotate(8deg);background:#7b36ff22;color:#fff}
+.status{padding:8px 12px;border-radius:999px;font-size:11px;font-weight:900}.ok{background:#25df8a18;color:#43ef9d}.pend{background:#f5a62318;color:#ffb332}.bad{background:#ef444418;color:#ff6767}
+.motion{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.motioncard{border:1px solid #ffffff14;border-radius:18px;padding:22px;background:#ffffff05;min-height:155px;transition:.35s}.motioncard:hover{transform:translateY(-9px);background:#7b36ff0e;border-color:#8b62ff55}.dot{width:26px;height:26px;border-radius:50%;background:var(--orange);margin-bottom:20px;animation:float 1.7s infinite}.motioncard:nth-child(2) .dot{background:var(--violet);animation:pulse 1.6s infinite}.motioncard:nth-child(3) .dot{background:var(--green);animation:spin 2.8s linear infinite}@keyframes float{50%{transform:translateY(-10px)}}@keyframes pulse{50%{transform:scale(1.35);box-shadow:0 0 0 12px #a45cff18}}@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SCREEN DETAILS */
+.screen-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:48px}.screen{background:#fff;border:1px solid var(--line);border-radius:28px;padding:16px;overflow:hidden;transition:.5s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d}.screen:hover{transform:perspective(1200px) translateY(-14px) rotateX(1.5deg) rotateY(-1.5deg);border-color:#9c79ff;box-shadow:18px 25px 0 #17171b,0 40px 80px #7b36ff18}.screen:nth-child(even):hover{transform:perspective(1200px) translateY(-14px) rotateX(1.5deg) rotateY(1.5deg);box-shadow:-18px 25px 0 var(--purple),0 40px 80px #7b36ff18}
+.screen-meta{display:flex;justify-content:space-between;padding:4px 7px 13px;font-size:10px;font-weight:900;letter-spacing:.14em}.screen-meta b{color:var(--purple)}.screen-meta span{color:#8b8b94}.screen-img{background:#0e0e12;border-radius:19px;padding:10px;position:relative;overflow:hidden}.screen-img img{width:100%;display:block;border-radius:13px;transition:.65s cubic-bezier(.16,1,.3,1)}.screen:hover img{transform:scale(1.025);filter:saturate(1.06) contrast(1.02)}
+.hover-tag{position:absolute;right:20px;top:20px;background:#111116dd;color:#fff;border:1px solid #ffffff22;padding:9px 12px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.08em;opacity:0;transform:translateY(-8px);transition:.4s}.screen:hover .hover-tag{opacity:1;transform:none}
+.screen-caption{display:flex;justify-content:space-between;gap:20px;padding:19px 8px 5px}.screen-caption h3{font-size:23px;margin-bottom:6px}.screen-caption p{font-size:13px;margin:0}.arrow{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--purple);transition:.35s;flex:0 0 auto}.screen:hover .arrow{transform:rotate(45deg);background:var(--purple);color:#fff}
+.details{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}.detail{padding:27px;border:1px solid var(--line);border-radius:22px;background:#fff;transition:.35s}.detail:hover{transform:translateY(-10px);box-shadow:0 25px 50px #11111612;border-color:#a18bff}.detail-icon{width:44px;height:44px;border-radius:13px;background:#7b36ff12;color:var(--purple);display:grid;place-items:center;font-size:19px;font-weight:950;margin-bottom:22px;transition:.35s}.detail:hover .detail-icon{transform:rotate(10deg) scale(1.1);background:var(--purple);color:#fff}.detail p{font-size:13px}
+.decision{display:grid;grid-template-columns:130px 1fr;gap:30px;padding:44px 0;border-top:1px solid var(--line);transition:.35s}.decision:hover{padding-left:18px}.dnum{font-size:75px;font-weight:950;color:transparent;-webkit-text-stroke:2px var(--purple);transition:.35s}.decision:hover .dnum{color:var(--orange);-webkit-text-stroke-color:var(--ink);transform:rotate(-6deg) scale(1.08)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.flow .pill{background:var(--ink);color:#fff;border-color:var(--ink)}.flow .pill:hover{background:var(--orange);color:#111;box-shadow:0 10px 0 var(--purple)}
+.reflection{background:var(--ink);color:#fff;border-radius:36px;padding:clamp(36px,7vw,80px);margin-top:35px;transition:.4s}.reflection:hover{transform:translateY(-8px);box-shadow:0 26px 0 var(--orange)}.reflection p{color:#bdbdc4}
+.footer{display:flex;justify-content:space-between;align-items:end;padding:80px clamp(24px,6vw,72px) 45px}.footer strong{font-size:clamp(42px,7vw,80px);letter-spacing:-.06em}.back{color:var(--purple);font-weight:900}
+.reveal{opacity:0;transform:translateY(44px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.75,.2,1)}.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.swatches{grid-template-columns:repeat(4,1fr)}.motion,.details{grid-template-columns:1fr}.dsrow{grid-template-columns:1fr;gap:16px}}
+@media(max-width:760px){.canvas{width:100%;margin:0;border-top-width:4px}.links{gap:12px}.hero{min-height:720px}.hero-orb{width:230px;height:230px;right:-70px}.hero-coin{width:100px;height:100px;font-size:50px;right:12%;bottom:100px}.split{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.swatches{grid-template-columns:repeat(2,1fr)}.decision{grid-template-columns:72px 1fr;gap:15px}.dnum{font-size:48px}.footer{align-items:flex-start;flex-direction:column}.bigword{display:none}}
+@media(max-width:460px){.links a:first-child{display:none}.meta{gap:7px}.pill{min-height:34px;padding:0 12px}.stats{grid-template-columns:1fr}.decision{grid-template-columns:1fr}.reflection{border-radius:24px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="canvas" id="top"><div class="grain"></div>
+
+<nav>
+<a class="brand" href="/" style="color:inherit;text-decoration:none"><span class="coin">p</span><span>Sachin → Case Study</span></a>
+<div class="links"><a href="#system">Design System</a><a href="#screens">Screen Details</a></div>
+</nav>
+
+<main>
+<section class="slice hero">
+<div class="hero-orb"></div><div class="hero-coin">p</div>
+<div class="eyebrow reveal">UPI payments · commerce · rewards · desktop experience</div>
+<h1 class="reveal">Pay smarter.<br><span class="outline">Live rewarded.</span></h1>
+<p class="hero-copy reveal">POP UPI brings payments, bills, shopping, transactions and POPcoins into one connected desktop experience — designed to make everyday money actions feel clear, fast and rewarding.</p>
+<div class="meta reveal"><span class="pill">Product / UI UX</span><span class="pill">Desktop Experience</span><span class="pill">Figma</span><span class="pill">Visual System</span><span class="pill">Interaction Design</span></div>
+<div class="scroll">Scroll to explore</div>
+</section>
+
+<section class="slice" style="--accent:var(--orange)">
+<div class="bigword" data-speed=".07">CONTEXT</div>
+<div class="split reveal"><div><div class="kicker">01 · Context</div><h2>A financial dashboard built around everyday actions.</h2><p class="lead">The POP desktop experience connects payments, bills, shopping, transactions and rewards inside one desktop shell.</p></div><div class="note"><strong>One system, multiple moments.</strong><p>Pay a contact, scan a QR, settle bills, shop with POPcoins, review transactions and understand rewards without switching between disconnected experiences.</p></div></div>
+<div class="stats"><div class="stat reveal"><b>06</b><span>Core desktop screens documented.</span></div><div class="stat reveal"><b>06</b><span>Primary navigation destinations.</span></div><div class="stat reveal"><b>01</b><span>Unified visual language.</span></div><div class="stat reveal"><b>∞</b><span>Micro-interaction possibilities.</span></div></div>
+</section>
+
+<section class="slice" style="--accent:var(--purple)">
+<div class="kicker reveal">02 · Design direction</div>
+<h2 class="reveal">Dark by default. Purple for action. Orange for reward.</h2>
+<p class="statement reveal">The interface uses <em>contrast and hierarchy</em> to make high-value actions visible without turning the dashboard into visual noise.</p>
+<div class="split reveal"><div><h3>Visual hierarchy</h3><p>Near-black surfaces create the base for financial information. Purple identifies primary interaction and active states, while orange becomes the visual cue for POPcoins and rewards.</p></div><div><h3>Interaction principle</h3><p>Hover, elevation and state transitions reinforce where the user is, what can be clicked and what has changed.</p></div></div>
+</section>
+
+<section class="slice" id="system" style="--accent:var(--orange)">
+<div class="kicker reveal">03 · Design system</div>
+<h2 class="reveal">A reusable visual language for POP UPI desktop.</h2>
+<p class="lead reveal">Tokens, typography, components, states and motion are documented as one system, using the same animated case-study language as the TAGX reference.</p>
+<div class="system reveal">
+
+<div class="dsrow"><div class="label">01 · Color</div><div class="swatches">
+<div class="swatch s1"><b>POP Purple</b><small>#7B36FF</small></div><div class="swatch s2"><b>Accent Violet</b><small>#A45CFF</small></div><div class="swatch s3"><b>POP Orange</b><small>#FF5B18</small></div><div class="swatch s4"><b>Reward Light</b><small>#FF8A38</small></div><div class="swatch s5"><b>Success</b><small>#25DF8A</small></div><div class="swatch s6"><b>Pending</b><small>#F5A623</small></div><div class="swatch s7"><b>Paper</b><small>#F8F7F3</small></div>
+</div></div>
+
+<div class="dsrow"><div class="label">02 · Typography</div><div class="type"><div><span class="txl">Pay smarter.</span> <span class="tm">Display / 950</span></div><div><span class="tlg">Recent transactions</span> <span class="tm">Heading / 850</span></div><div><span class="tbody">Clear labels, readable amounts and supporting descriptions keep financial information scannable.</span> <span class="tm">Body / 400–600</span></div></div></div>
+
+<div class="dsrow"><div class="label">03 · Components</div><div class="components"><button class="btn">Primary action</button><button class="btn alt">Secondary action</button><span class="status ok">Success</span><span class="status pend">Pending</span><span class="status bad">Failed</span><span class="icon">↗</span><span class="icon">⌕</span><span class="icon">⌁</span></div></div>
+
+<div class="dsrow"><div class="label">04 · Radius & spacing</div><div><p style="color:#c7c7ce">Generous desktop cards, rounded controls and consistent spacing keep dense finance information approachable.</p><div class="components"><span class="pill">8 px · control</span><span class="pill">14 px · compact</span><span class="pill">20–24 px · card</span><span class="pill">32–36 px · feature</span></div></div></div>
+
+<div class="dsrow"><div class="label">05 · Motion</div><div class="motion"><div class="motioncard"><div class="dot"></div><b>Lift & reveal</b><p>Cards rise into view and gain depth on hover.</p></div><div class="motioncard"><div class="dot"></div><b>Pulse for attention</b><p>Reward and active accents use restrained emphasis.</p></div><div class="motioncard"><div class="dot"></div><b>Continuous micro-motion</b><p>Decorative elements stay alive without distracting from tasks.</p></div></div></div>
+
+<div class="dsrow"><div class="label">06 · Interaction rules</div><div><p style="color:#c7c7ce">Scroll progress → top indicator. Section entry → fade + upward reveal. Navigation → animated underline. Cards → lift + subtle 3D tilt. Pills → lift + scale. Hero objects → pointer parallax. Large background words → scroll parallax. Reduced-motion preference → motion disabled.</p></div></div>
+</div>
+</section>
+
+<section class="slice" id="screens" style="--accent:var(--purple)">
+<div class="bigword" data-speed="-.045">SCREENS</div>
+<div class="kicker reveal">04 · Screen details</div>
+<h2 class="reveal">The product is a system of connected screens, not isolated pages.</h2>
+<p class="lead reveal">Each screen has a distinct job while keeping the same navigation, surface treatment, purple action language, POPcoin visual cues, status patterns and interaction rhythm.</p>
+<div class="screen-grid">
+<article class="screen reveal">
+<div class="screen-meta"><b>01</b><span>DESKTOP SCREEN</span></div>
+<div class="screen-img"><img src="/images/pop-upi/screen-1.webp" alt="Home dashboard"><span class="hover-tag">EXPLORE ↗</span></div>
+<div class="screen-caption"><div><h3>Home dashboard</h3><p>Primary dashboard · payment overview, recent activity, bills and POPcoins.</p></div><span class="arrow">↗</span></div>
+</article>
+<article class="screen reveal">
+<div class="screen-meta"><b>02</b><span>DESKTOP SCREEN</span></div>
+<div class="screen-img"><img src="/images/pop-upi/screen-2.webp" alt="POP Shop"><span class="hover-tag">EXPLORE ↗</span></div>
+<div class="screen-caption"><div><h3>POP Shop</h3><p>Commerce experience · categories, products, cart and POPcoin discount.</p></div><span class="arrow">↗</span></div>
+</article>
+<article class="screen reveal">
+<div class="screen-meta"><b>03</b><span>DESKTOP SCREEN</span></div>
+<div class="screen-img"><img src="/images/pop-upi/screen-3.webp" alt="Bills & recharges"><span class="hover-tag">EXPLORE ↗</span></div>
+<div class="screen-caption"><div><h3>Bills & recharges</h3><p>Utility hub · bill categories, bills due, autopay and payment history.</p></div><span class="arrow">↗</span></div>
+</article>
+<article class="screen reveal">
+<div class="screen-meta"><b>04</b><span>DESKTOP SCREEN</span></div>
+<div class="screen-img"><img src="/images/pop-upi/screen-4.webp" alt="POPcoins & rewards"><span class="hover-tag">EXPLORE ↗</span></div>
+<div class="screen-caption"><div><h3>POPcoins & rewards</h3><p>Rewards experience · earning history, expiry, progress and redemption.</p></div><span class="arrow">↗</span></div>
+</article>
+<article class="screen reveal">
+<div class="screen-meta"><b>05</b><span>DESKTOP SCREEN</span></div>
+<div class="screen-img"><img src="/images/pop-upi/screen-5.webp" alt="Transactions"><span class="hover-tag">EXPLORE ↗</span></div>
+<div class="screen-caption"><div><h3>Transactions</h3><p>Transaction history · filters, payment states and detailed transaction drawer.</p></div><span class="arrow">↗</span></div>
+</article>
+<article class="screen reveal">
+<div class="screen-meta"><b>06</b><span>DESKTOP SCREEN</span></div>
+<div class="screen-img"><img src="/images/pop-upi/screen-6.webp" alt="Make a payment"><span class="hover-tag">EXPLORE ↗</span></div>
+<div class="screen-caption"><div><h3>Make a payment</h3><p>Payment flow · QR upload, recipient options, bank security and recent payments.</p></div><span class="arrow">↗</span></div>
+</article>
+</div>
+</section>
+
+<section class="slice" style="--accent:var(--orange)">
+<div class="kicker reveal">05 · UI detailing</div>
+<h2 class="reveal">Details that keep the desktop experience readable.</h2>
+<div class="details">
+<article class="detail reveal"><div class="detail-icon">↗</div><h3>Action hierarchy</h3><p>Primary actions use saturated purple and strong contrast; secondary actions remain quieter.</p></article>
+<article class="detail reveal"><div class="detail-icon">₹</div><h3>Money readability</h3><p>Amounts are separated from metadata while status chips provide immediate feedback.</p></article>
+<article class="detail reveal"><div class="detail-icon">p</div><h3>Reward language</h3><p>POPcoins use a dedicated orange identity so reward value remains distinguishable.</p></article>
+<article class="detail reveal"><div class="detail-icon">⌕</div><h3>Search first</h3><p>The persistent search bar supports contacts, merchants, bills and destinations.</p></article>
+<article class="detail reveal"><div class="detail-icon">◷</div><h3>State visibility</h3><p>Pending, successful and failed states use color, iconography and labels together.</p></article>
+<article class="detail reveal"><div class="detail-icon">↔</div><h3>Connected navigation</h3><p>Home, Pay, Shop, Bills, Rewards and Transactions share one desktop shell.</p></article>
+</div>
+</section>
+
+<section class="slice" style="--accent:var(--purple)">
+<div class="kicker reveal">06 · Interaction decisions</div>
+<h2 class="reveal">Motion supports orientation instead of competing with the interface.</h2>
+<article class="decision reveal"><div class="dnum">01</div><div><h3>Scroll reveals create a guided case-study rhythm</h3><p>Content enters progressively as the viewer moves through the portfolio, matching the TAGX interaction language.</p></div></article>
+<article class="decision reveal"><div class="dnum">02</div><div><h3>Hover depth makes large screenshots feel tangible</h3><p>Screen cards lift, tilt subtly and reveal an interaction chip, making the screenshots feel explorable.</p></div></article>
+<article class="decision reveal"><div class="dnum">03</div><div><h3>Micro-interactions reinforce the POP visual language</h3><p>Purple handles action and navigation, orange handles reward emphasis, and green, amber and red communicate transaction states.</p><div class="flow"><span class="pill">Hover lift</span><span class="pill">3D tilt</span><span class="pill">Scroll reveal</span><span class="pill">Parallax</span><span class="pill">Animated underline</span></div></div></article>
+</section>
+
+<section class="slice" style="--accent:var(--orange)">
+<div class="kicker reveal">07 · Reflection</div>
+<h2 class="reveal">A financial product can feel functional without feeling cold.</h2>
+<div class="reflection reveal"><p class="lead" style="color:#fff">The POP UPI desktop direction balances financial clarity with a recognizable rewards identity.</p><p>The visual system combines dark surfaces, purple actions, orange POPcoin moments and clear transaction states across payment, commerce and rewards journeys.</p><p>Next, the interaction layer could be validated with usability testing focused on navigation, payment confidence, transaction comprehension, POPcoin redemption and discoverability.</p></div>
+</section>
+</main>
+
+<footer class="footer"><strong>POP<span style="color:var(--purple)"> UPI</span></strong><a class="back" href="#top">Back to top ↑</a></footer>
+</div>
+
+<script>
+const root=document.documentElement;
+addEventListener('scroll',()=>{
+ const max=document.body.scrollHeight-innerHeight;
+ root.style.setProperty('--progress',max?scrollY/max:0);
+ document.querySelectorAll('[data-speed]').forEach(el=>{
+  el.style.setProperty('--shift',((scrollY-el.parentElement.offsetTop)*Number(el.dataset.speed))+'px');
+ });
+},{passive:true});
+addEventListener('pointermove',e=>{
+ root.style.setProperty('--mx',(e.clientX/innerWidth-.5).toFixed(3));
+ root.style.setProperty('--my',(e.clientY/innerHeight-.5).toFixed(3));
+},{passive:true});
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{
+ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}
+}),{threshold:.10,rootMargin:'0px 0px -45px'});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+ el.style.transitionDelay=(Math.min(i%4,3)*70)+'ms';io.observe(el);
+});
+</script>
+</body>
+</html>
