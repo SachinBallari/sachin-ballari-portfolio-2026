@@ -146,6 +146,10 @@ function Artwork({ kind, label }) {
       ? { src: '/images/boathelper-cover.png', alt: 'Boathelper mobile app case study cover' }
       : kind === 'art-4'
         ? { src: '/images/rbi-case-study-thumbnail.png', alt: 'RBI website redesign case study cover' }
+      : kind === 'art-3'
+        ? { src: '/images/pop-upi-cover.jpg', alt: 'POP UPI website design cover' }
+      : kind === 'art-5'
+        ? { src: '/images/interactive-portfolio-cover.jpg', alt: 'Interactive portfolio studio room cover' }
       : null;
   return <div className={`artwork ${kind || ''}`} aria-label={`${label} visual`} role="img">{cover ? <img className="project-cover-image" src={cover.src} alt={cover.alt}/> : <><div className="art-orbit"/><div className="art-sheet"/><div className="art-panel"><i/><i/><i/><b>{label}</b></div><div className="art-caption">REPLACE WITH<br/>YOUR PROJECT IMAGE</div></>}</div>;
 }
